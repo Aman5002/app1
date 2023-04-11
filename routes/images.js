@@ -16,4 +16,17 @@ router.post('/fetchimages', fetchuser ,async (req, res) => {
     const img = await Image.find({user : verifieduser.id});
     res.json(img)
 })
+router.put('/editimage', fetchuser, async (req, res) => {
+    const img = await Image.findByIdAndUpdate(req.body.id, {
+        title: req.body.title,
+        description: req.body.description,
+        tag: req.body.tag,
+        imgUrl: req.body.imgUrl
+    })
+    res.json(img)
+})
+router.delete('/deleteimage',fetchuser, async (req, res) => {
+    const img = await Image.findByIdAndDelete(req.body.id)
+    res.json(img)
+})
 module.exports = router
